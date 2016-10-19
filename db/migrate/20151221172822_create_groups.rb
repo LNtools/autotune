@@ -29,7 +29,7 @@ class CreateGroups < ActiveRecord::Migration
     # Add data and theme inheritance model
     rename_column :autotune_themes, :value, :slug
     rename_column :autotune_themes, :label, :title
-    add_column :autotune_themes, :data, :mediumtext
+    add_column :autotune_themes, :data, :text
     add_reference :autotune_themes, :parent, index: true
 
 
