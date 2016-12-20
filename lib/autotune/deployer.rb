@@ -79,15 +79,21 @@ module Autotune
 
     # Get the url to a file
     def url_for(path)
-      return project_url if path == '/' || path.blank?
+      url = project_url
+
+      if path == '/' || path.blank?
+        return url  << '/' unless url.end_with?('/')
+      end
 
       path = path[1..-1] if path[0] == '/'
 
       if asset?(path)
-        [project_asset_url, path].join('/')
+        url = [project_asset_url, path].join('/')
       else
-        [project_url, path].join('/')
+        url = [project_url, path].join('/')
       end
+
+      url  << '/' unless url.end_with?('/')
     end
 
     def deploy_path
