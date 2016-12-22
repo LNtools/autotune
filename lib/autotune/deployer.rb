@@ -77,12 +77,21 @@ module Autotune
       raise NotImplementedError
     end
 
-    # Get the url to a file
-    def url_for(path)
+    # If requested, adds a trailing slash if not present.
+    def _fix_trailing_slash(url, add=true)
+      if add
+        url  << '/' unless url.end_with?('/')
+      else
+        url
+      end
+    end
+
+    # Get the url to a file, by default adds a trailing slash if not present.
+    def url_for(path, add_trailing_slash=true)
       url = project_url
 
       if path == '/' || path.blank?
-        return url  << '/' unless url.end_with?('/')
+        return _fix_trailing_slash(url, add_trailing_slash)
       end
 
       path = path[1..-1] if path[0] == '/'
@@ -93,7 +102,7 @@ module Autotune
         url = [project_url, path].join('/')
       end
 
-      url  << '/' unless url.end_with?('/')
+      return _fix_trailing_slash(url, add_trailing_slash)
     end
 
     def deploy_path
