@@ -66,10 +66,10 @@
     </thead>
     <tbody>
       <tr class="m-table-heading">
-        <td> <%= I18n.t('autotune.blueprint') %> </td>
-        <td> <%= I18n.t('autotune.status') %> </td>
-        <td> <%= I18n.t('autotune.mode') %> </td>
-        <td class="bold-actions-cell"> <%= I18n.t('autotune.actions') %> </td>
+        <td> <%= I18n.t('autotune.list-head-blueprint') %> </td>
+        <td> <%= I18n.t('autotune.list-head-status') %> </td>
+        <td> <%= I18n.t('autotune.list-head-mode') %> </td>
+        <td class="bold-actions-cell"> <%= I18n.t('autotune.list-head-actions') %> </td>
       </tr>
     <% if(getObjects().length == 0) { %>
         <td class="text-center" colspan="4"><h4> <%= I18n.t('autotune.no-blueprints') %> </h4></td>
@@ -79,22 +79,22 @@
       <td><a href="<%=item.url() %>"><%= item.attributes.title %></a></td>
       <td>
         <% if( item.hasStatus('built') ) { %>
-          <span class="label label-success"><%=item.get('status') %></span>
+          <span class="label label-success"> <%= I18n.t('autotune.filter-blueprint-status-built') %> </span>
         <% } else if( item.hasStatus('broken') ) { %>
-          <span class="label label-danger"><%=item.get('status') %></span>
+          <span class="label label-danger"> <%= I18n.t('autotune.filter-blueprint-status-broken') %> </span>
         <% } else if( item.hasStatus('updating') ) { %>
-          <span class="label label-info"><%=render(require('./spinner.ejs'), {size:10, color:'#282E35'})%> <%= I18n.t('autotune.blueprint-upgrading') %> </span>
+          <span class="label label-info"><%=render(require('./spinner.ejs'), {size:10, color:'#282E35'})%> <%= I18n.t('autotune.filter-blueprint-status-upgrading') %> </span>
         <% } else { %>
-          <span class="label label-info"><%=item.get('status') %></span>
+          <span class="label label-info"> <%= I18n.t('autotune.filter-blueprint-status-' + item.get('status'), { defaultValue: capitalize(item.get('status')) }) %> </span>
         <% } %>
       </td>
       <td>
         <% if(item.get('mode') == 'ready') { %>
-        <span class="label label-success"><%=capitalize( item.get('mode') )%></span>
+        <span class="label label-success"> <%= I18n.t('autotune.blueprint-mode-ready') %> </span>
         <% } else if( item.get('mode') == 'retired' ) { %>
-        <span class="label label-default"><%=capitalize( item.get('mode') )%></span>
+        <span class="label label-default"> <%= I18n.t('autotune.blueprint-mode-retired') %> </span>
         <% } else { %>
-        <span class="label label-info"><%=capitalize( item.get('mode') )%></span>
+        <span class="label label-info"><%= I18n.t('autotune.blueprint-mode-' + item.get('mode'), { defaultValue: capitalize( item.get('mode') ) }) %></span>
         <% } %>
       </td>
       <td class="text-right" colspan="2">

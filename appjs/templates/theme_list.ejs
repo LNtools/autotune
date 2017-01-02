@@ -96,11 +96,11 @@
       </td>
       <td>
         <% if(item.get('status') == 'ready') { %>
-          <span class="label label-success"><%=item.get('status') %></span>
+          <span class="label label-success"> <%= I18n.t('autotune.filter-theme-status-ready') %> </span>
         <% } else if(item.get('status') == 'broken') { %>
-          <span class="label label-danger"><%=item.get('status') %></span>
+          <span class="label label-danger"> <%= I18n.t('autotune.filter-theme-status-broken') %> </span>
         <% } else if(item.hasStatus('updating')) { %>
-        <span class="label label-info"><%=render(require('./spinner.ejs'), {size:10, color:'#282E35'})%> <%= I18n.t('autotune.status-upgrading') %> </span>
+        <span class="label label-info"><%=render(require('./spinner.ejs'), {size:10, color:'#282E35'})%> <%= I18n.t('autotune.filter-theme-status-upgrading') %> </span>
         <% } else { %>
           <span class="label label-info"><%=item.get('status') %></span>
         <% } %>
