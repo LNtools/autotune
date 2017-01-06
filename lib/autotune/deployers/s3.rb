@@ -34,7 +34,7 @@ module Autotune
         if path =~ /\.\w{1,8}$/
           super
         else
-          super + '/'
+          super + '/index.html'
         end
       end
     end
