@@ -30,7 +30,7 @@ module Autotune
       end
 
       # Get the url to a file
-      def url_for(path)
+      def url_for(path, add_trailing_slash=false)
         if path =~ /\.\w{1,8}$/
           super
         else
